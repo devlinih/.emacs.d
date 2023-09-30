@@ -10,8 +10,8 @@
 (setq native-comp-async-report-warnings-errors nil
       native-comp-deferred-compilation t)
 
-(require 'comp)
-(when (native-comp-available-p)
+(when (and (>= emacs-major-version 28) (native-comp-available-p))
+  (require 'comp)
   (native-compile-prune-cache))
 
 (setq-default

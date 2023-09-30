@@ -57,8 +57,8 @@ Silence errors, compile on demand
 Prune cache:
 
 #+begin_src emacs-lisp
-  (require 'comp)
-  (when (native-comp-available-p)
+  (when (and (>= emacs-major-version 28) (native-comp-available-p))
+    (require 'comp)
     (native-compile-prune-cache))
 #+end_src
 
