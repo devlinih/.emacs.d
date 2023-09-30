@@ -1,0 +1,52 @@
+#+TITLE: TEMPLATE: Machine Specific Emacs Settings
+#+PROPERTY: header-args:emacs-lisp :tangle ./TEMPLATE-machine-specific.el :mkdirp yes
+
+This is a *TEMPLATE* for the machine specific settings. It is based on the awoo (desktop) config. I may also consider dumping the whole machine specific thing because they are all pretty much the name now.
+
+*Copy this file to Machine.org and modify as needed*
+
+*Change the tangle path to machine-specific.el as well*
+
+#+begin_src emacs-lisp
+  ;;;; Machine Specific Settings for Emacs: awoo
+#+end_src
+
+* Fonts
+
+Set the default font size
+
+#+begin_src emacs-lisp
+  (defvar machine/default-font-size 120) ; Font size, height
+
+  (set-fontset-font t 'emoji
+                    '("Twemoji" . "iso10646-1") nil 'prepend)
+
+  (set-face-attribute 'default nil
+                      :font "GoMono Nerd Font"
+                      :height machine/default-font-size)
+
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil
+                      :font "GoMono Nerd Font"
+                      :height machine/default-font-size)
+
+   ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil
+                      :font "TeX Gyre Schola"
+                      :height (round (* 1.3 machine/default-font-size))
+                      :weight 'regular)
+#+end_src
+
+* Auto Tangle
+
+#+begin_src emacs-lisp
+  ;; Automatically tangle our Machine.org config file when we save it
+  (defun machine/org-babel-tangle-config ()
+    (when (string-equal (buffer-file-name)
+                        (expand-file-name "~/.emacs.d/Machine.org"))
+      ;; Dynamic scoping to the rescue
+      (let ((org-confirm-babel-evaluate nil))
+        (org-babel-tangle))))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'machine/org-babel-tangle-config)))
+#+end_src
