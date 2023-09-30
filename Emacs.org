@@ -1,14 +1,26 @@
 #+title: Devlin Ih's Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
-* TODO Checkout structural editing for both Lisp like lispy or paredit and also tree-sitter for other languages like combobulate
+* Note: things to checkout still
 
-* TODO Checkout =wucuo= for better program spelling (after work)
+Idk if it's possible to hide some sections in github/gitlab org preview sorry
 
-* TODO Breadcrumbs in Eglot (the only reason I am still on lsp mode)
+*** TODO Checkout structural editing for both Lisp like lispy or paredit and also tree-sitter for other languages like combobulate
+
+*** TODO Checkout =wucuo= for better program spelling (after work)
+
+*** TODO Breadcrumbs in Eglot (the only reason I am still on lsp mode)
 
 https://github.com/joaotavora/breadcrumb might work
 
+* Attributions
+
+My Emacs configuration is the product of about 7 years (as of 2023) of +copy-pasting from other configurations+ as well as actually learning to read documentation. I would like to give credit where credit is do, but a lot of it is lost to time unfortunately...
+
+Places I know I took from:
+- [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs from Scratch]] Youtube Series and respective [[https://github.com/daviwil/emacs-from-scratch/][Github]] repo (at this point this configuration is very different from that (and I never used evil), but the auto-tangle still exists)
+- Various posts from the [[https://www.masteringemacs.org/][Mastering Emacs]] blog
+- And of course, lots of Stackoverflow and Reddit...
 
 * Introduction
 
