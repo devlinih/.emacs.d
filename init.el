@@ -324,6 +324,11 @@ This is a hopefully temporary solution. Maybe I can contribute to upstream?"
           (lambda ()
             (add-hook 'after-save-hook #'config/org-babel-tangle-config)))
 
+(require 'ox-latex)
+
+(add-to-list 'org-latex-packages-alist
+             '("skip=10pt plus1pt, indent=0em" "parskip" nil))
+
 (customize-set-value
  'org-latex-hyperref-template
  "
@@ -331,8 +336,6 @@ This is a hopefully temporary solution. Maybe I can contribute to upstream?"
 
 ;; Allows using Emacs' syntax highlighting in pdf exports!
 (use-package engrave-faces)
-
-(require 'ox-latex)
 
 ;; xelatex
 (setq org-latex-compiler "xelatex")

@@ -513,6 +513,18 @@ Kinda jank, stolen code.
 
 ** Export Settings
 
+#+begin_src emacs-lisp
+  (require 'ox-latex)
+#+end_src
+
+Change paragraph spacing:
+
+#+begin_src emacs-lisp
+  (add-to-list 'org-latex-packages-alist
+               '("skip=10pt plus1pt, indent=0em" "parskip" nil))
+#+end_src
+
+
 Hyperlinks should be colored!
 
 #+begin_src emacs-lisp
@@ -532,8 +544,6 @@ Use =engraved= exporter! Looks awesome for PDFs.
 LaTeX export using Emacs native syntax highlighting.
 
 #+begin_src emacs-lisp
-  (require 'ox-latex)
-
   ;; xelatex
   (setq org-latex-compiler "xelatex")
 
