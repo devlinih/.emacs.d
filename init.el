@@ -57,7 +57,7 @@
  tab-always-indent 'complete
 
  ;; Fill Column
- fill-column 120
+ fill-column 79
 
  ;; Sentence ends with a single space
  sentence-end-double-space nil
