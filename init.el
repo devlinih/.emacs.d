@@ -979,6 +979,8 @@ background of code to whatever theme I'm using's background"
 
 (use-package license-templates)
 
+(use-package apheleia)
+
 (use-package parinfer-rust-mode
   ;; Only install on compatible architectures
   ;; :if (member dih/hardware-arch '("x86_64"))
@@ -1041,8 +1043,6 @@ background of code to whatever theme I'm using's background"
    '("\\.m\\'" . matlab-mode)))
 
 (add-to-list 'auto-mode-alist '("\\PKGBUILD\\'" . sh-mode))
-
-(use-package py-autopep8)
 
 (use-package pyvenv
   :init
@@ -1129,6 +1129,7 @@ background of code to whatever theme I'm using's background"
           time-stamp
           block-end-comments
           ports))
+  (setq verilog-ext-tags-backend 'tree-sitter)
   :config
   (verilog-ext-mode-setup))
 

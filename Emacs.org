@@ -1574,6 +1574,14 @@ Install package to automatically insert license headers.
   (use-package license-templates)
 #+end_src
 
+** Auto-Formatting
+
+Use Apheleia for autoformatting
+
+#+begin_src emacs-lisp
+  (use-package apheleia)
+#+end_src
+
 ** Languages
 *** Lisps
 
@@ -1701,10 +1709,6 @@ Awful programming language that you have to pay for. Only good for linear algebr
 #+end_src
 
 *** Python
-
-#+begin_src emacs-lisp
-  (use-package py-autopep8)
-#+end_src
 
 **** Virtual Environments
 
@@ -1840,6 +1844,7 @@ Extensions to verilog mode, looks pretty awesome.
             time-stamp
             block-end-comments
             ports))
+    (setq verilog-ext-tags-backend 'tree-sitter)
     :config
     (verilog-ext-mode-setup))
 #+end_src
