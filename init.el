@@ -329,10 +329,21 @@ This is a hopefully temporary solution. Maybe I can contribute to upstream?"
 (add-to-list 'org-latex-packages-alist
              '("skip=10pt plus1pt, indent=0em" "parskip" nil))
 
+;; URLs should break on hyphens
+(add-to-list 'org-latex-packages-alist "\\PassOptionsToPackage{hyphens}{url}")
+
+;; Disable the automatic insertion of hypersetup
 (customize-set-value
- 'org-latex-hyperref-template
- "
-\\hypersetup{\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L},\n colorlinks=true}\n")
+   'org-latex-hyperref-template
+   "\\hypersetup{
+linktoc=all,
+colorlinks=true,
+urlcolor=DeepSkyBlue1
+}
+")
+
+;; Add xcolor to included packages
+(add-to-list 'org-latex-packages-alist "\\usepackage[x11names]{xcolor}")
 
 ;; Allows using Emacs' syntax highlighting in pdf exports!
 (use-package engrave-faces)

@@ -428,6 +428,8 @@ Install package from web by default (unless told otherwise). The default is use 
 
 Org-mode is the first package configured to avoid issues with conflicting versions.
 
+My org setup is a complete mess and probably should be cleaned up.
+
 ** Setup
 
 Call use-package
@@ -528,10 +530,21 @@ Change paragraph spacing:
 Hyperlinks should be colored!
 
 #+begin_src emacs-lisp
+  ;; URLs should break on hyphens
+  (add-to-list 'org-latex-packages-alist "\\PassOptionsToPackage{hyphens}{url}")
+
+  ;; Disable the automatic insertion of hypersetup
   (customize-set-value
-   'org-latex-hyperref-template
-   "
-  \\hypersetup{\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L},\n colorlinks=true}\n")
+     'org-latex-hyperref-template
+     "\\hypersetup{
+  linktoc=all,
+  colorlinks=true,
+  urlcolor=DeepSkyBlue1
+  }
+  ")
+
+  ;; Add xcolor to included packages
+  (add-to-list 'org-latex-packages-alist "\\usepackage[x11names]{xcolor}")
 #+end_src
 
 Use =engraved= exporter! Looks awesome for PDFs.
