@@ -1090,7 +1090,8 @@ background of code to whatever theme I'm using's background"
         ("M-b" . dih/verilog-backward-word))
   :config
   ;; Because it complains about t not being a list
-  (setq verilog-auto-arg-sort t))
+  (setq verilog-auto-arg-sort t)
+  (add-to-list 'verilog-library-directories ".."))
 
 (use-package verilog-ext
   :hook ((verilog-mode . verilog-ext-mode))

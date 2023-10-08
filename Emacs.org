@@ -1793,7 +1793,8 @@ There is a solution presented [[https://github.com/veripool/verilog-mode/issues/
           ("M-b" . dih/verilog-backward-word))
     :config
     ;; Because it complains about t not being a list
-    (setq verilog-auto-arg-sort t))
+    (setq verilog-auto-arg-sort t)
+    (add-to-list 'verilog-library-directories ".."))
 #+end_src
 
 **** Verilog Ext
