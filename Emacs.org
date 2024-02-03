@@ -1072,7 +1072,9 @@ To integrate the password store into Emacs for things like TRAMP
 
 #+begin_src emacs-lisp
   (use-package auth-source-pass
-    :init (auth-source-pass-enable))
+    :init (auth-source-pass-enable)
+    :after
+    (setq auth-sources '(password-store)))
 #+end_src
 
 *** A nice front end
@@ -1462,6 +1464,13 @@ Just a nicety for configuring colors.
     :bind
     (("C-x g" . magit-status)
      ("C-x p m" . magit-project-status)))
+#+end_src
+
+*** Forge Integration (Github, Gitlab, etc)
+
+#+begin_src emacs-lisp
+  (use-package forge
+    :after magit)
 #+end_src
 
 ** YASnippet

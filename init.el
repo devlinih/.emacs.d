@@ -647,7 +647,9 @@ background of code to whatever theme I'm using's background"
   ([remap describe-key] . helpful-key))
 
 (use-package auth-source-pass
-  :init (auth-source-pass-enable))
+  :init (auth-source-pass-enable)
+  :after
+  (setq auth-sources '(password-store)))
 
 (use-package pass)
 
@@ -926,6 +928,9 @@ background of code to whatever theme I'm using's background"
   :bind
   (("C-x g" . magit-status)
    ("C-x p m" . magit-project-status)))
+
+(use-package forge
+  :after magit)
 
 (use-package yasnippet)
 
