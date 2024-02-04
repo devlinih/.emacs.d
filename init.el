@@ -1107,7 +1107,8 @@ background of code to whatever theme I'm using's background"
   :config
   ;; Because it complains about t not being a list
   (setq verilog-auto-arg-sort t)
-  (add-to-list 'verilog-library-directories ".."))
+  (add-to-list 'verilog-library-directories "..")
+  (add-to-list 'verilog-library-directories "../hdl"))
 
 (use-package verilog-ext
   :hook ((verilog-mode . verilog-ext-mode))
