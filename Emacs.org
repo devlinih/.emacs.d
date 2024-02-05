@@ -1073,7 +1073,7 @@ To integrate the password store into Emacs for things like TRAMP
 #+begin_src emacs-lisp
   (use-package auth-source-pass
     :init (auth-source-pass-enable)
-    :after
+    :config
     (setq auth-sources '(password-store)))
 #+end_src
 

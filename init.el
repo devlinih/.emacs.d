@@ -648,7 +648,7 @@ background of code to whatever theme I'm using's background"
 
 (use-package auth-source-pass
   :init (auth-source-pass-enable)
-  :after
+  :config
   (setq auth-sources '(password-store)))
 
 (use-package pass)
