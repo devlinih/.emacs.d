@@ -486,6 +486,38 @@ background of code to whatever theme I'm using's background"
 
 (use-package diminish)
 
+(use-package aas
+  :hook (LaTeX-mode . aas-activate-for-major-mode)
+  :hook (org-mode . aas-activate-for-major-mode)
+  :hook (aas-mode . yas-minor-mode))
+
+(use-package laas
+  :hook (LaTeX-mode . laas-mode)
+  :hook (org-mode . laas-mode)
+  :config
+  (aas-set-snippets 'laas-mode
+    "\\begin" (lambda () (interactive)
+                (yas-expand-snippet "\\begin{$1}\n$0\n\\end{$1}\n"))
+
+    :cond #'texmathp ; expand only while in math
+    ;; bind to functions!
+    "Sum" (lambda () (interactive)
+            (yas-expand-snippet "\\sum_{$1}^{$2} $0"))
+    "text" (lambda () (interactive)
+             (yas-expand-snippet "\\text{$1}$0"))
+    "left(" (lambda () (interactive)
+              (yas-expand-snippet "\\left( $1 \\right)$0"))
+    "left[" (lambda () (interactive)
+              (yas-expand-snippet "\\left[ $1 \\right]$0"))
+    "left{" (lambda () (interactive)
+              (yas-expand-snippet "\\left\\\\{ $1 \\right\\\\}$0"))
+    "left|" (lambda () (interactive)
+              (yas-expand-snippet "\\left| $1 \\right|$0"))
+
+    ;; add accent snippets
+    :cond #'laas-object-on-left-condition
+    "qq" (lambda () (interactive) (laas-wrap-previous-object "sqrt"))))
+
 ;; Find ideal set of arguments for aspell
 ;; Taken from http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs/
 (defun config/flyspell-detect-ispell-args (&optional run-together)
