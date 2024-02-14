@@ -498,6 +498,8 @@ background of code to whatever theme I'm using's background"
   (aas-set-snippets 'laas-mode
     "\\begin" (lambda () (interactive)
                 (yas-expand-snippet "\\begin{$1}\n$0\n\\end{$1}\n"))
+    "$$" (lambda () (interactive)
+           (yas-expand-snippet "\\$$1\\$"))
 
     :cond #'texmathp ; expand only while in math
     ;; bind to functions!
