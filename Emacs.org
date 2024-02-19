@@ -1520,8 +1520,13 @@ Just a nicety for configuring colors.
 Installing so lsp-mode can use it
 
 #+begin_src emacs-lisp
-  (use-package yasnippet)
+  (use-package yasnippet
+    :config
+    (setq yas-snippet-dirs (append yas-snippet-dirs
+                                   (concat user-emacs-directory "my-snippets"))))
 #+end_src
+
+
 
 ** Tree-Sitter
 
