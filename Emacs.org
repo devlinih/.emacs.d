@@ -1522,8 +1522,11 @@ Installing so lsp-mode can use it
 #+begin_src emacs-lisp
   (use-package yasnippet
     :config
-    (setq yas-snippet-dirs (append yas-snippet-dirs
-                                   (concat user-emacs-directory "my-snippets"))))
+    (setq yas-snippet-dirs (cons (concat user-emacs-directory "my-snippets")
+                                 yas-snippet-dirs))
+
+    :bind
+    (("C-c s" . yas-insert-snippet)))
 #+end_src
 
 

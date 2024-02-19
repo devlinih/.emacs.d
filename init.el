@@ -968,8 +968,11 @@ background of code to whatever theme I'm using's background"
 
 (use-package yasnippet
   :config
-  (setq yas-snippet-dirs (append yas-snippet-dirs
-                                 (concat user-emacs-directory "my-snippets"))))
+  (setq yas-snippet-dirs (cons (concat user-emacs-directory "my-snippets")
+                               yas-snippet-dirs))
+
+  :bind
+  (("C-c s" . yas-insert-snippet)))
 
 (use-package treesit-auto
   :if (>= emacs-major-version 29)
