@@ -1176,6 +1176,7 @@ background of code to whatever theme I'm using's background"
           block-end-comments
           ports))
   (setq verilog-ext-tags-backend 'tree-sitter)
+  (setq verilog-ts-indent-level 3)
   :config
   (verilog-ext-mode-setup))
 

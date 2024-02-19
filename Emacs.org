@@ -1905,6 +1905,7 @@ Extensions to verilog mode, looks pretty awesome.
             block-end-comments
             ports))
     (setq verilog-ext-tags-backend 'tree-sitter)
+    (setq verilog-ts-indent-level 3)
     :config
     (verilog-ext-mode-setup))
 #+end_src
