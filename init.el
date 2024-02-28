@@ -421,6 +421,10 @@ background of code to whatever theme I'm using's background"
 (use-package citeproc
   :after org)
 
+(use-package org-fragtog
+  :after org
+  :hook (org-mode . org-fragtog-mode))
+
 (use-package all-the-icons
   :if (display-graphic-p))
 

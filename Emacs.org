@@ -653,6 +653,16 @@ Use citeproc for citations in Org. This is awesome.
     :after org)
 #+end_src
 
+** Fragtog
+
+Toggle LaTeX fragments automagically:
+
+#+begin_src emacs-lisp
+  (use-package org-fragtog
+    :after org
+    :hook (org-mode . org-fragtog-mode))
+#+end_src
+
 * Appearance
 ** All the Icons
 
