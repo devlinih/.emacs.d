@@ -1689,7 +1689,8 @@ Quicklisp integration
 I've become curious about poking around with this at some point. I have not gotten to it yet though.
 
 #+begin_src emacs-lisp
-  (use-package racket-mode)
+  (use-package racket-mode
+    :disabled)
     ;; :config
     ;; (require 'lsp)
     ;; (lsp-register-client
@@ -1741,7 +1742,8 @@ Just for testing, minimal config for now.
 Also, if they are gonna ship a =go-ts-mode= will end up using that instead most likely, as tree-sitter modes tend to rock.
 
 #+begin_src emacs-lisp
-  (use-package go-mode)
+  (use-package go-mode
+    :disabled)
 #+end_src
 
 *** Haskell
@@ -1749,7 +1751,8 @@ Also, if they are gonna ship a =go-ts-mode= will end up using that instead most 
 Just for XMonad, if I ever go back to that...
 
 #+begin_src emacs-lisp
-  (use-package haskell-mode)
+  (use-package haskell-mode
+    :disabled)
 #+end_src
 
 *** MATLAB/Octave
@@ -1764,7 +1767,7 @@ Awful programming language that you have to pay for. Only good for linear algebr
 
 #+begin_src emacs-lisp
   (use-package matlab
-    :straight matlab-mode
+    :disabled
     :config
     (add-to-list
      'auto-mode-alist
@@ -1814,7 +1817,8 @@ Nice to have yaml files with syntax highlighting
 Used for a course (do I look like some high frequency trading company...)
 
 #+begin_src emacs-lisp
-  (use-package tuareg)
+  (use-package tuareg
+    :disabled)
 
   (use-package ocamlformat
     :disabled
@@ -1938,34 +1942,6 @@ Install RISCV mode:
 
 * FUN
 This stuff is very important I swear...
-
-** nyan-mode
-
-It's a nice way of knowing where you are okay?
-
-Unfortunately it really slows down Emacs in some cases. Also does not work in most mode lines.
-
-#+begin_src emacs-lisp
-  (use-package nyan-mode
-    :disabled
-    :init
-    (setq nyan-animate-nyancat t
-          nyan-wavy-trail t
-          nyan-bar-length 20
-          nyan-minimum-window-width 90
-          nyan-animation-frame-interval 0.1)
-    :config
-    (nyan-mode))
-#+end_src
-
-** Selectric Mode
-
-I B M (writing it with spaces like that is an inside joke sorry)
-
-#+begin_src emacs-lisp
-  (use-package selectric-mode
-    :disabled)
-#+end_src
 
 ** Lorem Ipsum
 

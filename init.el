@@ -1048,7 +1048,8 @@ background of code to whatever theme I'm using's background"
 
 (use-package sly-quicklisp)
 
-(use-package racket-mode)
+(use-package racket-mode
+  :disabled)
   ;; :config
   ;; (require 'lsp)
   ;; (lsp-register-client
@@ -1078,14 +1079,16 @@ background of code to whatever theme I'm using's background"
 
 (use-package cmake-mode)
 
-(use-package go-mode)
+(use-package go-mode
+  :disabled)
 
-(use-package haskell-mode)
+(use-package haskell-mode
+  :disabled)
 
 ;; (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 (use-package matlab
-  :straight matlab-mode
+  :disabled
   :config
   (add-to-list
    'auto-mode-alist
@@ -1105,7 +1108,8 @@ background of code to whatever theme I'm using's background"
 
 (use-package yaml-mode)
 
-(use-package tuareg)
+(use-package tuareg
+  :disabled)
 
 (use-package ocamlformat
   :disabled
@@ -1189,20 +1193,6 @@ background of code to whatever theme I'm using's background"
   (setq fpga-feature-list '(xilinx)))
 
 (use-package riscv-mode)
-
-(use-package nyan-mode
-  :disabled
-  :init
-  (setq nyan-animate-nyancat t
-        nyan-wavy-trail t
-        nyan-bar-length 20
-        nyan-minimum-window-width 90
-        nyan-animation-frame-interval 0.1)
-  :config
-  (nyan-mode))
-
-(use-package selectric-mode
-  :disabled)
 
 (use-package lorem-ipsum)
 
