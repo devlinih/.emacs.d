@@ -1940,6 +1940,15 @@ Install RISCV mode:
   (use-package riscv-mode)
 #+end_src
 
+** R
+
+Starting to do some statistical analysis and was quickly getting annoyed by R Studio
+
+#+begin_src emacs-lisp
+  (use-package ess)
+  (use-package poly-R)
+#+end_src
+
 * FUN
 This stuff is very important I swear...
 

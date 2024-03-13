@@ -1194,6 +1194,9 @@ background of code to whatever theme I'm using's background"
 
 (use-package riscv-mode)
 
+(use-package ess)
+(use-package poly-R)
+
 (use-package lorem-ipsum)
 
 (put 'narrow-to-region 'disabled nil) ; Region narrowing is useful
