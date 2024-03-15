@@ -428,43 +428,59 @@ background of code to whatever theme I'm using's background"
 (use-package all-the-icons
   :if (display-graphic-p))
 
-;; (when (>= emacs-major-version 29)
-;;   (set-frame-parameter nil 'alpha-background 90)
-;;   (add-to-list 'default-frame-alist '(alpha-background . 90)))
+(when (>= emacs-major-version 29)
+  (set-frame-parameter nil 'alpha-background 95)
+  (add-to-list 'default-frame-alist '(alpha-background . 95)))
 
 (setq custom-safe-themes t) ; Trust all themes
 
-(use-package gruvbox-theme)
+(use-package gruvbox-theme
+  :disabled)
 
 ;; Rainbow delimiters
-(defun my/set-rainbow-delimiters-gruvbox ()
+
+;; (setq dih/rainbow-delim-colors
+;;       '("#cc241d" ; Red
+;;         "#fabd2f" ; Yellow
+;;         "#98971a" ; Green
+;;         "#689d6a" ; Aqua
+;;         "#458588" ; Blue
+;;         "#b16286" ; Purple
+;;         "#a89984" ; FG darkened
+;;         "#ebdbb2")) ; FG
+
+;; (setq dih/rainbow-delim-unmatched-colors
+;;       '("#665c54"
+;;         "#fdf4c1"))
+
+;; (load-theme 'gruvbox-dark-medium)
+;; (my/set-rainbow-delimiters-gruvbox)
+
+(defun dih/set-rainbow-delimiters (colors-matched colors-unmatched)
+  "Don't worry about this awful code"
   (with-eval-after-load 'rainbow-delimiters
     (set-face-attribute 'rainbow-delimiters-depth-1-face nil
-                        :foreground "#cc241d") ; Red
+                        :foreground (nth 0 colors-matched)) ; Red
     (set-face-attribute 'rainbow-delimiters-depth-2-face nil
-                        :foreground "#fabd2f") ; Yellow
+                        :foreground (nth 1 colors-matched)) ; Yellow
     (set-face-attribute 'rainbow-delimiters-depth-3-face nil
-                        :foreground "#98971a") ; Green
+                        :foreground (nth 2 colors-matched)) ; Green
     (set-face-attribute 'rainbow-delimiters-depth-4-face nil
-                        :foreground "#689d6a") ; Aqua
+                        :foreground (nth 3 colors-matched)) ; Aqua
     (set-face-attribute 'rainbow-delimiters-depth-5-face nil
-                        :foreground "#458588") ; Blue
+                        :foreground (nth 4 colors-matched)) ; Blue
     (set-face-attribute 'rainbow-delimiters-depth-6-face nil
-                        :foreground "#b16286") ; Purple
+                        :foreground (nth 5 colors-matched)) ; Purple
     (set-face-attribute 'rainbow-delimiters-depth-7-face nil
-                        :foreground "#a89984") ; FG darkened
+                        :foreground (nth 6 colors-matched)) ; FG darkened
     (set-face-attribute 'rainbow-delimiters-depth-8-face nil
-                        :foreground "#ebdbb2") ; FG
+                        :foreground (nth 7 colors-matched)) ; FG
     (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                        :background "#665c54"
-                        :foreground "#fdf4c1")))
+                        :background (car colors-unmatched)
+                        :foreground (cadr colors-unmatched))))
 
-(load-theme 'gruvbox-dark-medium)
-(my/set-rainbow-delimiters-gruvbox)
-
-(use-package solo-jazz-theme
-  :disabled)
-;; (load-theme 'solo-jazz)
+(dih/set-rainbow-delimiters dih/rainbow-delim-colors
+                            dih/rainbow-delim-unmatched-colors)
 
 (use-package mood-line
   :custom-face
