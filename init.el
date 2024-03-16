@@ -434,6 +434,32 @@ background of code to whatever theme I'm using's background"
 
 (setq custom-safe-themes t) ; Trust all themes
 
+(use-package modus-themes)
+
+(load-theme 'modus-operandi-tinted) ; Best light from this IMO
+;; (load-theme 'modus-vivendi)      ; Best dark from this IMO
+
+(setq dih/rainbow-delim-colors
+        (mapcar #'(lambda (x)
+                    (modus-themes--retrieve-palette-value
+                     x
+                     modus-operandi-tinted-palette))
+                '(red-faint
+                  green
+                  yellow-warmer
+                  blue-faint
+                  maroon
+                  cyan-faint
+                  fg-dim
+                  fg-main)))
+  (setq dih/rainbow-delim-unmatched-colors
+        (mapcar #'(lambda (x)
+                    (modus-themes--retrieve-palette-value
+                     x
+                     modus-operandi-tinted-palette))
+                '(bg-prominent-warning
+                  fg-prominent-warning)))
+
 (use-package gruvbox-theme
   :disabled)
 

@@ -690,37 +690,36 @@ Trust all themes
   (setq custom-safe-themes t) ; Trust all themes
 #+end_src
 
-*** COMMENT Modus
+*** Modus
 
 Two versions included in Emacs, but not all of them.
 
 #+begin_src emacs-lisp
   (use-package modus-themes)
 
-  (setq dih/rainbow-delim-colors
-        (mapcar #'(lambda (x)
-                    (modus-themes--retrieve-palette-value
-                      x
-                      modus-operandi-tinted-palette))
-                '(red-faint
-                  green
-                  yellow-warmer
-                  blue-faint
-                  maroon
-                  cyan-faint
-                  fg-dim
-                  fg-main)))
-  (setq dih/rainbow-delim-unmatched-colors
-        (mapcar #'(lambda (x)
-                    (modus-themes--retrieve-palette-value
-                      x
-                      modus-operandi-tinted-palette))
-                '(bg-prominent-warning
-                  fg-prominent-warning)))
-
-
   (load-theme 'modus-operandi-tinted) ; Best light from this IMO
   ;; (load-theme 'modus-vivendi)      ; Best dark from this IMO
+
+  (setq dih/rainbow-delim-colors
+          (mapcar #'(lambda (x)
+                      (modus-themes--retrieve-palette-value
+                       x
+                       modus-operandi-tinted-palette))
+                  '(red-faint
+                    green
+                    yellow-warmer
+                    blue-faint
+                    maroon
+                    cyan-faint
+                    fg-dim
+                    fg-main)))
+    (setq dih/rainbow-delim-unmatched-colors
+          (mapcar #'(lambda (x)
+                      (modus-themes--retrieve-palette-value
+                       x
+                       modus-operandi-tinted-palette))
+                  '(bg-prominent-warning
+                    fg-prominent-warning)))
 #+end_src
 
 *** Gruvbox
