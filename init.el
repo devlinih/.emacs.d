@@ -428,37 +428,42 @@ background of code to whatever theme I'm using's background"
 (use-package all-the-icons
   :if (display-graphic-p))
 
-(when (>= emacs-major-version 29)
-  (set-frame-parameter nil 'alpha-background 95)
-  (add-to-list 'default-frame-alist '(alpha-background . 95)))
+;; (when (>= emacs-major-version 29)
+;;   (set-frame-parameter nil 'alpha-background 95)
+;;   (add-to-list 'default-frame-alist '(alpha-background . 95)))
 
 (setq custom-safe-themes t) ; Trust all themes
 
-(use-package modus-themes)
+(use-package kaolin-themes
+  :config
+  (load-theme 'kaolin-valley-light))
 
-(load-theme 'modus-operandi-tinted) ; Best light from this IMO
+(use-package modus-themes
+  :disabled)
+
+;; (load-theme 'modus-operandi-tinted) ; Best light from this IMO
 ;; (load-theme 'modus-vivendi)      ; Best dark from this IMO
 
-(setq dih/rainbow-delim-colors
-        (mapcar #'(lambda (x)
-                    (modus-themes--retrieve-palette-value
-                     x
-                     modus-operandi-tinted-palette))
-                '(red-faint
-                  green
-                  yellow-warmer
-                  blue-faint
-                  maroon
-                  cyan-faint
-                  fg-dim
-                  fg-main)))
-  (setq dih/rainbow-delim-unmatched-colors
-        (mapcar #'(lambda (x)
-                    (modus-themes--retrieve-palette-value
-                     x
-                     modus-operandi-tinted-palette))
-                '(bg-prominent-warning
-                  fg-prominent-warning)))
+;; (setq dih/rainbow-delim-colors
+;;         (mapcar #'(lambda (x)
+;;                     (modus-themes--retrieve-palette-value
+;;                      x
+;;                      modus-operandi-tinted-palette))
+;;                 '(red-faint
+;;                   green
+;;                   yellow-warmer
+;;                   blue-faint
+;;                   maroon
+;;                   cyan-faint
+;;                   fg-dim
+;;                   fg-main)))
+;; (setq dih/rainbow-delim-unmatched-colors
+;;       (mapcar #'(lambda (x)
+;;                   (modus-themes--retrieve-palette-value
+;;                    x
+;;                    modus-operandi-tinted-palette))
+;;               '(bg-prominent-warning
+;;                 fg-prominent-warning)))
 
 (use-package gruvbox-theme
   :disabled)
@@ -482,31 +487,42 @@ background of code to whatever theme I'm using's background"
 ;; (load-theme 'gruvbox-dark-medium)
 ;; (my/set-rainbow-delimiters-gruvbox)
 
-(defun dih/set-rainbow-delimiters (colors-matched colors-unmatched)
-  "Don't worry about this awful code"
-  (with-eval-after-load 'rainbow-delimiters
-    (set-face-attribute 'rainbow-delimiters-depth-1-face nil
-                        :foreground (nth 0 colors-matched)) ; Red
-    (set-face-attribute 'rainbow-delimiters-depth-2-face nil
-                        :foreground (nth 1 colors-matched)) ; Yellow
-    (set-face-attribute 'rainbow-delimiters-depth-3-face nil
-                        :foreground (nth 2 colors-matched)) ; Green
-    (set-face-attribute 'rainbow-delimiters-depth-4-face nil
-                        :foreground (nth 3 colors-matched)) ; Aqua
-    (set-face-attribute 'rainbow-delimiters-depth-5-face nil
-                        :foreground (nth 4 colors-matched)) ; Blue
-    (set-face-attribute 'rainbow-delimiters-depth-6-face nil
-                        :foreground (nth 5 colors-matched)) ; Purple
-    (set-face-attribute 'rainbow-delimiters-depth-7-face nil
-                        :foreground (nth 6 colors-matched)) ; FG darkened
-    (set-face-attribute 'rainbow-delimiters-depth-8-face nil
-                        :foreground (nth 7 colors-matched)) ; FG
-    (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                        :background (car colors-unmatched)
-                        :foreground (cadr colors-unmatched))))
+(use-package lambda-themes
+  :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
+  :disabled
+  :custom
+  (lambda-themes-set-italic-comments t)
+  (lambda-themes-set-italic-keywords t)
+  (lambda-themes-set-variable-pitch t)
+  :config
+  ;; load preferred theme
+  (load-theme 'lambda-light-faded))
 
-(dih/set-rainbow-delimiters dih/rainbow-delim-colors
-                            dih/rainbow-delim-unmatched-colors)
+;; (defun dih/set-rainbow-delimiters (colors-matched colors-unmatched)
+;;   "Don't worry about this awful code"
+;;   (with-eval-after-load 'rainbow-delimiters
+;;     (set-face-attribute 'rainbow-delimiters-depth-1-face nil
+;;                         :foreground (nth 0 colors-matched)) ; Red
+;;     (set-face-attribute 'rainbow-delimiters-depth-2-face nil
+;;                         :foreground (nth 1 colors-matched)) ; Yellow
+;;     (set-face-attribute 'rainbow-delimiters-depth-3-face nil
+;;                         :foreground (nth 2 colors-matched)) ; Green
+;;     (set-face-attribute 'rainbow-delimiters-depth-4-face nil
+;;                         :foreground (nth 3 colors-matched)) ; Aqua
+;;     (set-face-attribute 'rainbow-delimiters-depth-5-face nil
+;;                         :foreground (nth 4 colors-matched)) ; Blue
+;;     (set-face-attribute 'rainbow-delimiters-depth-6-face nil
+;;                         :foreground (nth 5 colors-matched)) ; Purple
+;;     (set-face-attribute 'rainbow-delimiters-depth-7-face nil
+;;                         :foreground (nth 6 colors-matched)) ; FG darkened
+;;     (set-face-attribute 'rainbow-delimiters-depth-8-face nil
+;;                         :foreground (nth 7 colors-matched)) ; FG
+;;     (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+;;                         :background (car colors-unmatched)
+;;                         :foreground (cadr colors-unmatched))))
+
+;; (dih/set-rainbow-delimiters dih/rainbow-delim-colors
+;;                             dih/rainbow-delim-unmatched-colors)
 
 (use-package mood-line
   :custom-face
@@ -996,7 +1012,7 @@ background of code to whatever theme I'm using's background"
 
 (use-package rainbow-delimiters
   :custom
-  (rainbow-delimiters-max-face-count 8)
+  (rainbow-delimiters-max-face-count 5)
   :hook
   ((prog-mode . rainbow-delimiters-mode)
    (matlab-mode . rainbow-delimiters-mode)))
