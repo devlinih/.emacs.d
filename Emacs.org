@@ -690,12 +690,22 @@ Trust all themes
   (setq custom-safe-themes t) ; Trust all themes
 #+end_src
 
+*** Catppuccin
+
+#+begin_src emacs-lisp
+  (use-package catppuccin-theme
+    :config
+    (setq catppuccin-flavor 'latte)
+    ;; (setq catppuccin-flavor 'frappe) ; Dark
+    (load-theme 'catppuccin))
+#+end_src
+
 *** Kaolin
 
 #+begin_src emacs-lisp
-  (use-package kaolin-themes
-    :config
-    (load-theme 'kaolin-valley-light))
+  (use-package kaolin-themes)
+    ;; :config
+    ;; (load-theme 'kaolin-valley-light))
 #+end_src
 
 **** Nice Light
@@ -716,27 +726,6 @@ Two versions included in Emacs, but not all of them.
 
   ;; (load-theme 'modus-operandi-tinted) ; Best light from this IMO
   ;; (load-theme 'modus-vivendi)      ; Best dark from this IMO
-
-  ;; (setq dih/rainbow-delim-colors
-  ;;         (mapcar #'(lambda (x)
-  ;;                     (modus-themes--retrieve-palette-value
-  ;;                      x
-  ;;                      modus-operandi-tinted-palette))
-  ;;                 '(red-faint
-  ;;                   green
-  ;;                   yellow-warmer
-  ;;                   blue-faint
-  ;;                   maroon
-  ;;                   cyan-faint
-  ;;                   fg-dim
-  ;;                   fg-main)))
-  ;; (setq dih/rainbow-delim-unmatched-colors
-  ;;       (mapcar #'(lambda (x)
-  ;;                   (modus-themes--retrieve-palette-value
-  ;;                    x
-  ;;                    modus-operandi-tinted-palette))
-  ;;               '(bg-prominent-warning
-  ;;                 fg-prominent-warning)))
 #+end_src
 
 *** Gruvbox
@@ -770,16 +759,16 @@ Old standby, love the dark version.
 *** Lambda
 
 #+begin_src emacs-lisp
-  (use-package lambda-themes
-    :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
-    :disabled
-    :custom
-    (lambda-themes-set-italic-comments t)
-    (lambda-themes-set-italic-keywords t)
-    (lambda-themes-set-variable-pitch t)
-    :config
-    ;; load preferred theme
-    (load-theme 'lambda-light-faded))
+  ;; (use-package lambda-themes
+  ;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
+  ;;   :disabled
+  ;;   :custom
+  ;;   (lambda-themes-set-italic-comments t)
+  ;;   (lambda-themes-set-italic-keywords t)
+  ;;   (lambda-themes-set-variable-pitch t)
+  ;;   :config
+  ;;   ;; load preferred theme
+  ;;   (load-theme 'lambda-light-faded))
 #+end_src
 
 *** Rainbow Delimiters
@@ -826,27 +815,6 @@ Not all themes support this out of the box, or not in a way I like
     ;; Enable
     (setq mood-line-glyph-alist mood-line-glyphs-fira-code)
     (mood-line-mode))
-#+end_src
-
-** Smart Mode Line
-
-Idk, it's kinda broken on Emacs 29
-
-Try maybe lambda line, mood line, doom line, etc
-
-#+begin_src emacs-lisp
-  (use-package smart-mode-line
-    :disabled
-    :config
-    (sml/setup)
-
-    :custom-face
-    (sml/line-number ((t (:inherit sml/modes :weight bold))))
-    (sml/col-number ((t (:inherit sml/line-number))))
-    ;; In the newer Emacs branch they make the modeline use the variable pitch
-    ;; font by default. I hate that because I have my variable pitch font set
-    ;; larger and it looked really stupid.
-    (mode-line-active ((t (:inherit mode-line)))))
 #+end_src
 
 ** Diminish

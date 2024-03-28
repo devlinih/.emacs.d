@@ -434,36 +434,21 @@ background of code to whatever theme I'm using's background"
 
 (setq custom-safe-themes t) ; Trust all themes
 
-(use-package kaolin-themes
+(use-package catppuccin-theme
   :config
-  (load-theme 'kaolin-valley-light))
+  (setq catppuccin-flavor 'latte)
+  ;; (setq catppuccin-flavor 'frappe) ; Dark
+  (load-theme 'catppuccin))
+
+(use-package kaolin-themes)
+  ;; :config
+  ;; (load-theme 'kaolin-valley-light))
 
 (use-package modus-themes
   :disabled)
 
 ;; (load-theme 'modus-operandi-tinted) ; Best light from this IMO
 ;; (load-theme 'modus-vivendi)      ; Best dark from this IMO
-
-;; (setq dih/rainbow-delim-colors
-;;         (mapcar #'(lambda (x)
-;;                     (modus-themes--retrieve-palette-value
-;;                      x
-;;                      modus-operandi-tinted-palette))
-;;                 '(red-faint
-;;                   green
-;;                   yellow-warmer
-;;                   blue-faint
-;;                   maroon
-;;                   cyan-faint
-;;                   fg-dim
-;;                   fg-main)))
-;; (setq dih/rainbow-delim-unmatched-colors
-;;       (mapcar #'(lambda (x)
-;;                   (modus-themes--retrieve-palette-value
-;;                    x
-;;                    modus-operandi-tinted-palette))
-;;               '(bg-prominent-warning
-;;                 fg-prominent-warning)))
 
 (use-package gruvbox-theme
   :disabled)
@@ -487,16 +472,16 @@ background of code to whatever theme I'm using's background"
 ;; (load-theme 'gruvbox-dark-medium)
 ;; (my/set-rainbow-delimiters-gruvbox)
 
-(use-package lambda-themes
-  :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
-  :disabled
-  :custom
-  (lambda-themes-set-italic-comments t)
-  (lambda-themes-set-italic-keywords t)
-  (lambda-themes-set-variable-pitch t)
-  :config
-  ;; load preferred theme
-  (load-theme 'lambda-light-faded))
+;; (use-package lambda-themes
+;;   :straight (:type git :host github :repo "lambda-emacs/lambda-themes")
+;;   :disabled
+;;   :custom
+;;   (lambda-themes-set-italic-comments t)
+;;   (lambda-themes-set-italic-keywords t)
+;;   (lambda-themes-set-variable-pitch t)
+;;   :config
+;;   ;; load preferred theme
+;;   (load-theme 'lambda-light-faded))
 
 ;; (defun dih/set-rainbow-delimiters (colors-matched colors-unmatched)
 ;;   "Don't worry about this awful code"
@@ -532,19 +517,6 @@ background of code to whatever theme I'm using's background"
   ;; Enable
   (setq mood-line-glyph-alist mood-line-glyphs-fira-code)
   (mood-line-mode))
-
-(use-package smart-mode-line
-  :disabled
-  :config
-  (sml/setup)
-
-  :custom-face
-  (sml/line-number ((t (:inherit sml/modes :weight bold))))
-  (sml/col-number ((t (:inherit sml/line-number))))
-  ;; In the newer Emacs branch they make the modeline use the variable pitch
-  ;; font by default. I hate that because I have my variable pitch font set
-  ;; larger and it looked really stupid.
-  (mode-line-active ((t (:inherit mode-line)))))
 
 (use-package diminish)
 
