@@ -1983,7 +1983,9 @@ Extensions to verilog mode, looks pretty awesome.
 Install RISCV mode:
 
 #+begin_src emacs-lisp
-  (use-package riscv-mode)
+  (use-package riscv-mode
+    :custom
+    (riscv-tab-width 2))
 #+end_src
 
 ** R

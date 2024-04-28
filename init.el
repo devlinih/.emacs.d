@@ -1222,7 +1222,9 @@ background of code to whatever theme I'm using's background"
   :init
   (setq fpga-feature-list '(xilinx)))
 
-(use-package riscv-mode)
+(use-package riscv-mode
+  :custom
+  (riscv-tab-width 2))
 
 (use-package ess)
 (use-package poly-R)
