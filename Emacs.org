@@ -390,18 +390,20 @@ Here for reference, I am using straight.el instead so it doesn't matter.
 Setup =straight.el= for packages. Install =use-package= as well.
 
 #+begin_src emacs-lisp
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+  ;; Don't use straight on windows
+  (unless package-enable-at-startup
+    (defvar bootstrap-version)
+    (let ((bootstrap-file
+           (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+          (bootstrap-version 5))
+      (unless (file-exists-p bootstrap-file)
+        (with-current-buffer
+            (url-retrieve-synchronously
+             "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+             'silent 'inhibit-cookies)
+          (goto-char (point-max))
+          (eval-print-last-sexp)))
+      (load bootstrap-file nil 'nomessage)))
 #+end_src
 
 * Use-Package
@@ -418,10 +420,15 @@ Install use-package if it not already available:
 Install package from web by default (unless told otherwise). The default is use installed unless told otherwise.
 
 #+begin_src emacs-lisp
-  ;; It's in straight instead of use-package, huh
-  (use-package straight
-    :custom
-    (straight-use-package-by-default t))
+  (when package-enable-at-startup
+    (require 'use-package-ensure)
+    (setq use-package-always-ensure t))
+
+  (unless package-enable-at-startup
+    ;; It's in straight instead of use-package, huh
+    (use-package straight
+      :custom
+      (straight-use-package-by-default t)))
 #+end_src
 
 * Org Mode
@@ -934,7 +941,6 @@ Then install with use package
 
 #+begin_src emacs-lisp
   (use-package flyspell
-    :straight nil
     :config
     (setq ispell-program-name "aspell")
     ;; Set arguments to pass to aspell
@@ -983,16 +989,16 @@ Centering text in any text mode buffer (text, org, markdown, etc)
 Well, my AUCTeX setup could be completely non-functional idk why I decided to tweak.
 
 #+begin_src emacs-lisp
-  (use-package tex
-    :straight auctex
-    :hook ((LaTeX-mode . LaTeX-math-mode))
-    :config
-    (setq TeX-source-correlate-mode t)
-    (setq TeX-source-correlate-method 'synctex)
-    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-          TeX-source-correlate-start-server t)
-    (setq TeX-parse-self t)
-    (setq TeX-auto-save t))
+    (use-package tex
+      :ensure auctex
+      :hook ((LaTeX-mode . LaTeX-math-mode))
+      :config
+      (setq TeX-source-correlate-mode t)
+      (setq TeX-source-correlate-method 'synctex)
+      (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+            TeX-source-correlate-start-server t)
+      (setq TeX-parse-self t)
+      (setq TeX-auto-save t))
 #+end_src
 
 *** Markdown Mode
@@ -1061,7 +1067,6 @@ TRAMP is really awesome. One of the killer features of Emacs IMO. I mean yes, it
 
 #+begin_src emacs-lisp
   (use-package tramp
-    :straight nil
     :custom
     ;; Use controlmaster options in ~/.ssh/ instead
     ((tramp-use-ssh-controlmaster-options . nil))
@@ -1085,7 +1090,7 @@ TRAMP is really awesome. One of the killer features of Emacs IMO. I mean yes, it
 
 #+begin_src emacs-lisp
   (use-package dired
-    :straight nil
+    :ensure nil
     :bind (("C-c j" . dired-jump))
     ;; Disable dired single because it makes dired over TRAMP unbearable
     ;; :map dired-mode-map ; Let's not repeat not being able to type b...
@@ -1193,7 +1198,8 @@ Hands down /*THE BEST*/ PDF viewer I have ever used. It's awesome: PDFs in Emacs
 #+begin_src emacs-lisp
   (use-package pdf-tools
     :config
-    (pdf-tools-install t t)) ; This might not work if it isn't installed yet.
+    (unless (equal system-type 'windows-nt)
+      (pdf-tools-install t t))) ; This might not work if it isn't installed yet.
 #+end_src
 
 ** Which Key

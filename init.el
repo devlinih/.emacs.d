@@ -242,28 +242,35 @@ This is a hopefully temporary solution. Maybe I can contribute to upstream?"
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("melpa" . "https://melpa.org/packages/")))
 
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; Don't use straight on windows
+(unless package-enable-at-startup
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage)))
 
 (unless (package-installed-p 'use-package)
   (if package-enable-at-startup
       (package-install "use-package")
     (straight-use-package 'use-package)))
 
-;; It's in straight instead of use-package, huh
-(use-package straight
-  :custom
-  (straight-use-package-by-default t))
+(when package-enable-at-startup
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t))
+
+(unless package-enable-at-startup
+  ;; It's in straight instead of use-package, huh
+  (use-package straight
+    :custom
+    (straight-use-package-by-default t)))
 
 (use-package org
   :bind (("C-c l" . org-store-link)
@@ -271,7 +278,7 @@ This is a hopefully temporary solution. Maybe I can contribute to upstream?"
   :config
   (setq org-directory "~/Org")
 
-  (setq org-ellipsis " ▾") ; Replace the ... on collapsed headers
+  (setq org-ellipsis " â¾") ; Replace the ... on collapsed headers
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
@@ -601,7 +608,6 @@ background of code to whatever theme I'm using's background"
 ;;   (setq-local ispell-extra-args (config/flyspell-detect-ispell-args)))
 
 (use-package flyspell
-  :straight nil
   :config
   (setq ispell-program-name "aspell")
   ;; Set arguments to pass to aspell
@@ -630,7 +636,7 @@ background of code to whatever theme I'm using's background"
   (visual-fill-column-fringes-outside-margins nil))
 
 (use-package tex
-  :straight auctex
+  :ensure auctex
   :hook ((LaTeX-mode . LaTeX-math-mode))
   :config
   (setq TeX-source-correlate-mode t)
@@ -664,7 +670,6 @@ background of code to whatever theme I'm using's background"
 (use-package diffview)
 
 (use-package tramp
-  :straight nil
   :custom
   ;; Use controlmaster options in ~/.ssh/ instead
   ((tramp-use-ssh-controlmaster-options . nil))
@@ -678,7 +683,7 @@ background of code to whatever theme I'm using's background"
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 (use-package dired
-  :straight nil
+  :ensure nil
   :bind (("C-c j" . dired-jump))
   ;; Disable dired single because it makes dired over TRAMP unbearable
   ;; :map dired-mode-map ; Let's not repeat not being able to type b...
@@ -726,7 +731,8 @@ background of code to whatever theme I'm using's background"
 
 (use-package pdf-tools
   :config
-  (pdf-tools-install t t)) ; This might not work if it isn't installed yet.
+  (unless (equal system-type 'windows-nt)
+    (pdf-tools-install t t))) ; This might not work if it isn't installed yet.
 
 (use-package which-key
   :init (which-key-mode)
