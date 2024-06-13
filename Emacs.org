@@ -1663,6 +1663,18 @@ Note: if it starts displaying things way too large in eldoc, look into the =eldo
   (use-package eglot)
 #+end_src
 
+Speed it up!
+
+#+begin_src emacs-lisp
+  (use-package eglot-booster
+    :straight (:type git :host github :repo "jdtsmith/eglot-booster")
+    :after eglot
+    :config
+    (fset #'jsonrpc--log-event #'ignore)
+    (setq eglot-events-buffer-size 0)
+    (eglot-booster-mode))
+#+end_src
+
 ** LSP-Mode
 
 Use Language Servers for fancy editing.

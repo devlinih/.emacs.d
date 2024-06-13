@@ -1039,6 +1039,14 @@ background of code to whatever theme I'm using's background"
 
 (use-package eglot)
 
+(use-package eglot-booster
+  :straight (:type git :host github :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config
+  (fset #'jsonrpc--log-event #'ignore)
+  (setq eglot-events-buffer-size 0)
+  (eglot-booster-mode))
+
 (use-package lsp-mode
   ;; :commands (lsp lsp-deferred)
   :disabled
