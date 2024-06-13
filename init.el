@@ -652,6 +652,10 @@ background of code to whatever theme I'm using's background"
 (use-package quarto-mode
   :disabled)
 
+(use-package beacon
+  :config
+  (beacon-mode))
+
 (use-package deadgrep)
 
 (use-package vdiff
@@ -927,7 +931,7 @@ background of code to whatever theme I'm using's background"
   "Run this function in hooks for other modes to force the capfs"
 
   ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-file))
   ;; (add-to-list 'completion-at-point-functions #'cape-tex)
   ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
@@ -939,7 +943,7 @@ background of code to whatever theme I'm using's background"
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
-  )
+
 
 ;; Default config
 (use-package cape
@@ -958,7 +962,8 @@ background of code to whatever theme I'm using's background"
          ("C-c p _" . cape-tex)
          ("C-c p ^" . cape-tex)
          ("C-c p &" . cape-sgml)
-         ("C-c p r" . cape-rfc1345))
+         ("C-c p r" . cape-rfc1345)
+         ("C-c p h" . cape-history))
   :hook
   ((text-mode . my/force-capfs)
    (prog-mode . my/force-capfs)
@@ -1015,18 +1020,22 @@ background of code to whatever theme I'm using's background"
   ;; (setq treesit-auto-install t)
   (global-treesit-auto-mode))
 
-(use-package tree-sitter
-  :if (< emacs-major-version 29)
-  :diminish
-  :config
-  (global-tree-sitter-mode)
-  :hook
-  (tree-sitter-mode . tree-sitter-hl-mode))
+;; (use-package tree-sitter
+;;   :if (< emacs-major-version 29)
+;;   :diminish
+;;   :config
+;;   (global-tree-sitter-mode)
+;;   :hook
+;;   (tree-sitter-mode . tree-sitter-hl-mode))
 
-(use-package tree-sitter-langs
-  :if (< emacs-major-version 29))
+;; (use-package tree-sitter-langs
+;;   :if (< emacs-major-version 29))
 
 (use-package origami)
+
+(use-package breadcrumb
+  :config
+  (breadcrumb-mode))
 
 (use-package eglot)
 
@@ -1130,9 +1139,14 @@ background of code to whatever theme I'm using's background"
   :init
   (setenv "WORKON_HOME" "~/.pyenv/versions"))
 
-(use-package poetry
+(use-package pet
+  :disabled
   :config
-  (poetry-tracking-mode))
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+
+;; (use-package poetry
+;;   :config
+;;   (poetry-tracking-mode))
 ;;:custom)
 ;;((poetry-tracking-strategy . 'switch-buffer)))
 

@@ -1024,6 +1024,17 @@ SoftDes experimentation
 #+end_src
 
 * Utility
+
+** Beacon
+
+Never lose your cursor again!
+
+#+begin_src emacs-lisp
+  (use-package beacon
+    :config
+    (beacon-mode))
+#+end_src
+
 ** Deadgrep
 
 An interface for ripgrep in Emacs
@@ -1463,7 +1474,7 @@ More completion at point things so I can get extra features in corfu akin to com
     "Run this function in hooks for other modes to force the capfs"
 
     ;; Add `completion-at-point-functions', used by `completion-at-point'.
-    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-file))
     ;; (add-to-list 'completion-at-point-functions #'cape-tex)
     ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
     ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
@@ -1475,7 +1486,7 @@ More completion at point things so I can get extra features in corfu akin to com
     ;;(add-to-list 'completion-at-point-functions #'cape-dict)
     ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
     ;;(add-to-list 'completion-at-point-functions #'cape-line)
-    )
+
 
   ;; Default config
   (use-package cape
@@ -1494,7 +1505,8 @@ More completion at point things so I can get extra features in corfu akin to com
            ("C-c p _" . cape-tex)
            ("C-c p ^" . cape-tex)
            ("C-c p &" . cape-sgml)
-           ("C-c p r" . cape-rfc1345))
+           ("C-c p r" . cape-rfc1345)
+           ("C-c p h" . cape-history))
     :hook
     ((text-mode . my/force-capfs)
      (prog-mode . my/force-capfs)
@@ -1607,20 +1619,20 @@ Emacs>=29 has built-in tree-sitter support. Use that when available. Otherwise, 
 *** Old Emacs Versions
 
 #+begin_src emacs-lisp
-  (use-package tree-sitter
-    :if (< emacs-major-version 29)
-    :diminish
-    :config
-    (global-tree-sitter-mode)
-    :hook
-    (tree-sitter-mode . tree-sitter-hl-mode))
+  ;; (use-package tree-sitter
+  ;;   :if (< emacs-major-version 29)
+  ;;   :diminish
+  ;;   :config
+  ;;   (global-tree-sitter-mode)
+  ;;   :hook
+  ;;   (tree-sitter-mode . tree-sitter-hl-mode))
 #+end_src
 
 Install grammars for a bunch of different languages.
 
 #+begin_src emacs-lisp
-  (use-package tree-sitter-langs
-    :if (< emacs-major-version 29))
+  ;; (use-package tree-sitter-langs
+  ;;   :if (< emacs-major-version 29))
 #+end_src
 
 ** Folding
@@ -1629,6 +1641,16 @@ Eventually use a treesitter based one?
 
 #+begin_src emacs-lisp
   (use-package origami)
+#+end_src
+
+** Breadcrumb
+
+Shows information about the file/project you are editing. Supercharged by Eglot.
+
+#+begin_src emacs-lisp
+  (use-package breadcrumb
+    :config
+    (breadcrumb-mode))
 #+end_src
 
 ** Eglot
@@ -1838,14 +1860,23 @@ Use pyvenv to manage virtual environments. Assumes Pyenv is used to manage Pytho
     (setenv "WORKON_HOME" "~/.pyenv/versions"))
 #+end_src
 
+If not using Pyenv, use PET to find virtual environments instead.
+
+#+begin_src emacs-lisp
+  (use-package pet
+    :disabled
+    :config
+    (add-hook 'python-base-mode-hook 'pet-mode -10))
+#+end_src
+
 **** Poetry
 
 Detect Poetry virtualenvs too.
 
 #+begin_src emacs-lisp
-  (use-package poetry
-    :config
-    (poetry-tracking-mode))
+  ;; (use-package poetry
+  ;;   :config
+  ;;   (poetry-tracking-mode))
   ;;:custom)
   ;;((poetry-tracking-strategy . 'switch-buffer)))
 #+end_src
@@ -1988,7 +2019,7 @@ Install RISCV mode:
     (riscv-tab-width 2))
 #+end_src
 
-** R
+*** R
 
 Starting to do some statistical analysis and was quickly getting annoyed by R Studio
 
